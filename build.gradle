@@ -20,7 +20,6 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.5.3'
-    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch:2.5.3'
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc:2.5.3'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.3'

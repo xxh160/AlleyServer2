@@ -1,4 +1,4 @@
-# README
+# NJU Alley Server Version 2
 
 用于 nju 校园建筑评分的 nju-alley 后端。
 
