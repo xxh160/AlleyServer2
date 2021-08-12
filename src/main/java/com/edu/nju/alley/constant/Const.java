@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum Const {
 
     SystemId("1"),
+    NullInstanceId("-1"),
     NullFatherId("-1"),
     NullPicUrl("-2"),
     NullOpenId("null");

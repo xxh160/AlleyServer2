@@ -29,6 +29,7 @@ public class CommentController {
     }
 
     @GetMapping("/view/{commentId}")
+
     public ResponseVO<CommentVO> view(@PathVariable Integer commentId) {
         return null;
     }

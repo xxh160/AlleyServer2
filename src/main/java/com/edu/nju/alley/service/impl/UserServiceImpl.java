@@ -6,13 +6,18 @@ import com.edu.nju.alley.api.WechatService;
 import com.edu.nju.alley.config.WechatConfig;
 import com.edu.nju.alley.constant.ReturnMessage;
 import com.edu.nju.alley.dao.UserDataService;
+import com.edu.nju.alley.dto.UserDTO;
 import com.edu.nju.alley.dto.UserLoginDTO;
 import com.edu.nju.alley.exp.NoSuchDataException;
 import com.edu.nju.alley.po.UserPO;
+import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.service.UserService;
+import com.edu.nju.alley.vo.CommentVO;
 import com.edu.nju.alley.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,14 +25,17 @@ public class UserServiceImpl implements UserService {
     private final WechatService wechatService;
     private final WechatConfig wechat;
     private final UserDataService userDataService;
+    private final CommentService commentService;
 
     @Autowired
     public UserServiceImpl(WechatService wechatService,
                            WechatConfig wechat,
-                           UserDataService userDataService) {
+                           UserDataService userDataService,
+                           CommentService commentService) {
         this.wechatService = wechatService;
         this.wechat = wechat;
         this.userDataService = userDataService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -59,6 +67,27 @@ public class UserServiceImpl implements UserService {
         user.updateInfo(userLoginDTO.getName(), userLoginDTO.getGender(), userLoginDTO.getAvatar());
         userDataService.updateUser(user);
         return UserVO.buildVO(user);
+    }
+
+    @Override
+    public UserVO view(Integer userId) {
+        UserPO user = userDataService.getUser(userId);
+        if (UserPO.isNullInstance(user)) throw new NoSuchDataException(ReturnMessage.NoSuchUserExp.getMsg());
+        return UserVO.buildVO(user);
+    }
+
+    @Override
+    public UserVO update(UserDTO userDTO) {
+        UserPO user = userDataService.getUser(userDTO.getUserId());
+        if (UserPO.isNullInstance(user)) throw new NoSuchDataException(ReturnMessage.NoSuchUserExp.getMsg());
+        user.setLocateAuth(userDTO.getLocateAuth());
+        userDataService.updateUser(user);
+        return UserVO.buildVO(user);
+    }
+
+    @Override
+    public List<CommentVO> comments(Integer userId) {
+        return null;
     }
 
 }

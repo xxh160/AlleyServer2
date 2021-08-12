@@ -235,6 +235,41 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/CommentVO"
+  /user/comment/is_like/{userId}:
+    get:
+      tags:
+        - user
+      summary: 获取用户是否已经点赞某评论
+      description: 通过 userId commentId 判断用户是否已经点赞评论
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          description: 用户 id
+          schema:
+            type: integer
+        - name: commentId
+          in: query
+          required: true
+          description: comment id
+          schema:
+            type: integer
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/LikeVO"
   /user/notices/{userId}:
     get:
       tags:
@@ -548,6 +583,19 @@ components:
         callback:
           type: string
           description: 上传成功后的回调设置
+    LikeVO:
+      type: object
+      description: 表示用户是否点赞某评论
+      properties:
+        userId:
+          type: integer
+          description: 用户 id
+        commentId:
+          type: integer
+          description: 评论 id
+        isLike:
+          type: boolean
+          description: 是否点赞
 
     ArchCommentDTO:
       type: object

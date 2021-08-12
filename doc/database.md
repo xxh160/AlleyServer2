@@ -77,3 +77,19 @@
 |score|integer|enum(1,2,3,4,5)，评分只有这 5 种情况|
 
 主键：user_id + arch_id
+
+### arch_picture
+
+|Column|Type|Description|
+|:---:|:---:|:---:|
+|arch_id|integer|建筑 id|
+|picture|varchar(1024)|建筑对应图片|
+
+一对多关系，一个建筑可以对应多张图片
+
+主键：arch_id + picture
+
+这不是一个很好的设计
+
+
+

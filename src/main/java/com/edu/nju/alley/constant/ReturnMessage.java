@@ -8,7 +8,8 @@ public enum ReturnMessage {
     Success("Success."),
     Failure("Failure."),
     UnknownExp("UnknownExp: "),
-    WechatExp("Wechat exception, error code: ");
+    WechatExp("Wechat exception, error code: "),
+    NoSuchUserExp("No such user.");
 
     private final String msg;
 

@@ -3,9 +3,7 @@ package com.edu.nju.alley.controller;
 import com.edu.nju.alley.dto.UserDTO;
 import com.edu.nju.alley.dto.UserLoginDTO;
 import com.edu.nju.alley.service.UserService;
-import com.edu.nju.alley.vo.CommentVO;
-import com.edu.nju.alley.vo.ResponseVO;
-import com.edu.nju.alley.vo.UserVO;
+import com.edu.nju.alley.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,16 +29,30 @@ public class UserController {
 
     @GetMapping("/view/{userId}")
     public ResponseVO<UserVO> view(@PathVariable Integer userId) {
-        return null;
+        return ResponseVO
+                .<UserVO>success()
+                .data(userService.view(userId));
     }
 
     @PostMapping("/update")
     public ResponseVO<UserVO> update(@RequestBody UserDTO userDTO) {
-        return null;
+        return ResponseVO
+                .<UserVO>success()
+                .data(userService.update(userDTO));
     }
 
     @GetMapping("/comments/{userId}")
     public ResponseVO<List<CommentVO>> comments(@PathVariable Integer userId) {
+        return null;
+    }
+
+    @GetMapping("/comment/is_like/{userId}")
+    public ResponseVO<LikeVO> isLike(@PathVariable Integer userId, @RequestParam Integer commentId) {
+        return null;
+    }
+
+    @GetMapping("/notices/{userId}")
+    public ResponseVO<List<NoticeVO>> notices(@PathVariable Integer userId) {
         return null;
     }
 

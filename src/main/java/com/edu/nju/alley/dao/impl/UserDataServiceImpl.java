@@ -29,6 +29,13 @@ public class UserDataServiceImpl implements UserDataService {
     }
 
     @Override
+    public UserPO getUser(Integer userId) {
+        Optional<UserPO> userOptional = userMapper
+                .selectByPrimaryKey(userId);
+        return userOptional.orElse(UserPO.getNullInstance());
+    }
+
+    @Override
     public void insertUser(UserPO user) {
         userMapper.insert(user);
     }

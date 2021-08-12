@@ -1,5 +1,6 @@
 package com.edu.nju.alley.po;
 
+import com.edu.nju.alley.constant.Const;
 import lombok.Data;
 
 @Data
@@ -30,12 +31,16 @@ public class UserPO {
     public static UserPO getNullInstance() {
         if (nullUser == null) {
             nullUser = new UserPO();
-            nullUser.setUserId(-1);
+            nullUser.setUserId(Integer.parseInt(Const.NullInstanceId.getId()));
         }
         return nullUser;
     }
 
     public static boolean isNullInstance(UserPO userPO) {
+        if (nullUser == null) {
+            nullUser = new UserPO();
+            nullUser.setUserId(Integer.parseInt(Const.NullInstanceId.getId()));
+        }
         return userPO.getUserId().equals(nullUser.getUserId());
     }
 
