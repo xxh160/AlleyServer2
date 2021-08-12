@@ -51,10 +51,14 @@ public class UserServiceImpl implements UserService {
         if (UserPO.isNullInstance(user)) {
             user = UserPO.getDefaultInstance(openId);
             user.updateInfo(userLoginDTO.getName(), userLoginDTO.getGender(), userLoginDTO.getAvatar());
-
+            userDataService.insertUser(user);
+            return UserVO.buildVO(user);
         }
 
-        return null;
+        //  存在这个用户 更新
+        user.updateInfo(userLoginDTO.getName(), userLoginDTO.getGender(), userLoginDTO.getAvatar());
+        userDataService.updateUser(user);
+        return UserVO.buildVO(user);
     }
 
 }

@@ -8,4 +8,6 @@ public interface UserDataService {
 
     void insertUser(UserPO user);
 
+    void updateUser(UserPO user);
+
 }

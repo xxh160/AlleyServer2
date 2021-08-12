@@ -33,4 +33,9 @@ public class UserDataServiceImpl implements UserDataService {
         userMapper.insert(user);
     }
 
+    @Override
+    public void updateUser(UserPO user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
 }
