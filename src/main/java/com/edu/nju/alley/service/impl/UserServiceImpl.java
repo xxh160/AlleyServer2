@@ -44,8 +44,16 @@ public class UserServiceImpl implements UserService {
             // 错误码非 0，出错
             if (errCode != 0) throw new NoSuchDataException(ReturnMessage.WechatExp.getMsg() + errCode);
         }
-        UserPO user = userDataService.getUser(json.getStr("openid"));
-        
+        String openId = json.getStr("openid");
+        UserPO user = userDataService.getUser(openId);
+
+        // 没有这个用户 注册
+        if (UserPO.isNullInstance(user)) {
+            user = UserPO.getDefaultInstance(openId);
+            user.updateInfo(userLoginDTO.getName(), userLoginDTO.getGender(), userLoginDTO.getAvatar());
+
+        }
+
         return null;
     }
 

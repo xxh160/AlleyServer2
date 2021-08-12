@@ -37,7 +37,7 @@ public interface UserMapper {
     int delete(DeleteStatementProvider deleteStatement);
 
     @InsertProvider(type = SqlProviderAdapter.class, method = "insert")
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "record.id", before = false, resultType = Integer.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "record.userId", before = false, resultType = Integer.class)
     int insert(InsertStatementProvider<UserPO> insertStatement);
 
     @InsertProvider(type = SqlProviderAdapter.class, method = "insertMultiple")

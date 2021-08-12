@@ -25,6 +25,12 @@ public class UserDataServiceImpl implements UserDataService {
     public UserPO getUser(String openId) {
         Optional<UserPO> userOptional = userMapper
                 .selectOne(c -> c.where(UserDSS.openId, isEqualTo(openId)));
-        return userOptional.orElse(null);
+        return userOptional.orElse(UserPO.getNullInstance());
     }
+
+    @Override
+    public void insertUser(UserPO user) {
+        userMapper.insert(user);
+    }
+
 }

@@ -6,4 +6,6 @@ public interface UserDataService {
 
     UserPO getUser(String openId);
 
+    void insertUser(UserPO user);
+
 }

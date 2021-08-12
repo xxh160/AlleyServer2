@@ -38,7 +38,7 @@ public interface CommentMapper {
     int delete(DeleteStatementProvider deleteStatement);
 
     @InsertProvider(type = SqlProviderAdapter.class, method = "insert")
-    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "record.id", before = false, resultType = Integer.class)
+    @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "record.commentId", before = false, resultType = Integer.class)
     int insert(InsertStatementProvider<CommentPO> insertStatement);
 
     @InsertProvider(type = SqlProviderAdapter.class, method = "insertMultiple")

@@ -5,18 +5,19 @@ import lombok.Getter;
 @Getter
 public enum Const {
 
-    SystemId(1),
-    NullFatherId(-1),
-    NullPicUrl(-2);
+    SystemId("1"),
+    NullFatherId("-1"),
+    NullPicUrl("-2"),
+    NullOpenId("null");
 
-    private final int id;
+    private final String id;
 
-    Const(int id) {
+    Const(String id) {
         this.id = id;
     }
 
     public boolean isNullPicUrl(String code) {
-        return (Integer.parseInt(code) == NullPicUrl.getId());
+        return code.equals(NullPicUrl.getId());
     }
 
 }
