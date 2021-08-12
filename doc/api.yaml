@@ -506,9 +506,6 @@ components:
           type: string
           format: date-time
           description: 创建时间
-        isLike:
-          type: boolean
-          description: 用户是否点赞
         picture:
           type: string
           description: 评论附图 url，如果没有则返回 -2
