@@ -30,4 +30,13 @@ public class CommentServiceImpl implements CommentService {
         return CommentVO.buildVO(comment, children);
     }
 
+    @Override
+    public List<CommentVO> userComments(Integer userId) {
+        return commentDataService
+                .getUserComments(userId)
+                .stream()
+                .map(cur -> view(cur.getCommentId()))
+                .collect(Collectors.toList());
+    }
+
 }

@@ -5,19 +5,17 @@ import cn.hutool.json.JSONUtil;
 import com.edu.nju.alley.api.WechatService;
 import com.edu.nju.alley.config.WechatConfig;
 import com.edu.nju.alley.constant.ReturnMessage;
+import com.edu.nju.alley.dao.LikeDataService;
 import com.edu.nju.alley.dao.UserDataService;
 import com.edu.nju.alley.dto.UserDTO;
 import com.edu.nju.alley.dto.UserLoginDTO;
 import com.edu.nju.alley.exp.NoSuchDataException;
 import com.edu.nju.alley.po.UserPO;
-import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.service.UserService;
-import com.edu.nju.alley.vo.CommentVO;
+import com.edu.nju.alley.vo.LikeVO;
 import com.edu.nju.alley.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,17 +23,17 @@ public class UserServiceImpl implements UserService {
     private final WechatService wechatService;
     private final WechatConfig wechat;
     private final UserDataService userDataService;
-    private final CommentService commentService;
+    private final LikeDataService likeDataService;
 
     @Autowired
     public UserServiceImpl(WechatService wechatService,
                            WechatConfig wechat,
                            UserDataService userDataService,
-                           CommentService commentService) {
+                           LikeDataService likeDataService) {
         this.wechatService = wechatService;
         this.wechat = wechat;
         this.userDataService = userDataService;
-        this.commentService = commentService;
+        this.likeDataService = likeDataService;
     }
 
     @Override
@@ -86,8 +84,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<CommentVO> comments(Integer userId) {
-        return null;
+    public LikeVO isLike(Integer userId, Integer commentId) {
+        return new LikeVO(userId, commentId, likeDataService.isExist(userId, commentId));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.edu.nju.alley.vo;
 
+import com.edu.nju.alley.po.NoticePO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,5 +21,14 @@ public class NoticeVO {
     private String content;
 
     private Boolean isUnread;
+
+    public static NoticeVO buildVO(NoticePO notice) {
+        return new NoticeVO(notice.getNoticeId(),
+                notice.getSenderId(),
+                notice.getCommentId(),
+                notice.getUserId(),
+                notice.getContent(),
+                notice.getIsUnread());
+    }
 
 }
