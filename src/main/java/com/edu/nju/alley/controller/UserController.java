@@ -24,7 +24,9 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseVO<UserVO> login(@RequestBody UserLoginDTO userLoginDTO) {
-        return null;
+        return ResponseVO
+                .<UserVO>success()
+                .data(userService.login(userLoginDTO));
     }
 
     @GetMapping("/view/{userId}")

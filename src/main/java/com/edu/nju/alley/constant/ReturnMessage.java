@@ -7,16 +7,13 @@ public enum ReturnMessage {
 
     Success("Success."),
     Failure("Failure."),
-    UnknownExp("UnknownExp: ");
+    UnknownExp("UnknownExp: "),
+    WechatExp("Wechat exception, error code: ");
 
-    private String msg;
+    private final String msg;
 
     ReturnMessage(String msg) {
         this.msg = msg;
-    }
-
-    void setMessage(String msg) {
-        this.msg = "Custom. " + msg;
     }
 
 }
