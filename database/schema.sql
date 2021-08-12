@@ -43,6 +43,28 @@ LOCK TABLES `arch` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `arch_picture`
+--
+
+DROP TABLE IF EXISTS `arch_picture`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `arch_picture` (
+  `arch_id` int(11) NOT NULL,
+  `picture` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `arch_picture`
+--
+
+LOCK TABLES `arch_picture` WRITE;
+/*!40000 ALTER TABLE `arch_picture` DISABLE KEYS */;
+/*!40000 ALTER TABLE `arch_picture` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `comment`
 --
 
@@ -164,7 +186,7 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_info_open_id_uindex` (`open_id`),
   UNIQUE KEY `user_info_user_id_uindex` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-12 15:20:48
+-- Dump completed on 2021-08-13  1:32:12
