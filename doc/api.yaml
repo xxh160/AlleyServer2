@@ -6,7 +6,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: 'https://<czh-domain>:<port>/api'
+  - url: 'https://www.chenzihong.cn/api'
 
 tags:
   - name: arch
@@ -346,7 +346,7 @@ paths:
                   data:
                     $ref: "#/components/schemas/CommentVO"
 
-  /notice/view/{noticeId}:
+  /notice/read/{noticeId}:
     post:
       tags:
         - notice

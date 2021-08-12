@@ -16,3 +16,7 @@ oss:
   dir:
   callback:
   max_size: 10
+
+wechat:
+  app-id:
+  app-secret:

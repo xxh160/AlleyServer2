@@ -9,10 +9,12 @@ public class NoticePO {
 
     private Integer senderId;
 
+    private Integer userId;
+
     private Integer commentId;
 
     private String content;
 
     private Boolean isUnread;
-    
+
 }

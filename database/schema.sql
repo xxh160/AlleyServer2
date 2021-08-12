@@ -129,9 +129,10 @@ DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice` (
   `notice_id` int(11) NOT NULL AUTO_INCREMENT,
   `sender_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `content` varchar(1024) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_unread` tinyint(1) NOT NULL,
+  `comment_id` int(11) NOT NULL,
   PRIMARY KEY (`notice_id`),
   UNIQUE KEY `notice_notice_id_uindex` (`notice_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -185,4 +186,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-12  1:21:50
+-- Dump completed on 2021-08-12 15:20:48

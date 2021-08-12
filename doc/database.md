@@ -39,6 +39,7 @@
 |:---:|:---:|:---:|
 |notice_id|integer|主键|
 |sender_id|integer|发送通知的用户 id，可能是系统，可能是点赞者或是评论者|
+|user_id|integer|被通知者的用户 id，也是 comment 的创建者|
 |comment_id|integer|原评论 id，若没有则为 -1，但应该不会有这样的情况|
 |content|varchar(1024)|通知内容|
 |is_unread|bool|是否未读|
