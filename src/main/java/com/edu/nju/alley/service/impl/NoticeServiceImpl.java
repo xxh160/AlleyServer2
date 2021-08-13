@@ -28,9 +28,11 @@ public class NoticeServiceImpl implements NoticeService {
                 .collect(Collectors.toList());
     }
 
-    //阅读通知
+    //阅读通知并标记通知为已读
     @Override
     public Object read(Integer noticeId) {
+        //更新NoticePO的isUnread属性
+        //诶这里不应该返回通知的内容吗
         return null;
     }
 

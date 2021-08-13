@@ -45,12 +45,18 @@ public class CommentServiceImpl implements CommentService {
     //评论一条评论
     @Override
     public CommentVO comment(ChildCommentDTO childCommentDTO) {
+        //获得当前时间作为CreateT
+        //初始化likenum为0
+        //创建CommentPO并插入
+        //返回CommentVO
         return null;
     }
 
     //点赞或取消点赞评论
     @Override
     public Object like(Integer commentId, Integer userId) {
+        //插入或删除一条LikePO
+        //更新CommentPO中的likeNum
         return null;
     }
 
