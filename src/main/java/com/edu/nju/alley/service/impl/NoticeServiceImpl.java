@@ -26,4 +26,9 @@ public class NoticeServiceImpl implements NoticeService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Object read(Integer noticeId) {
+        return null;
+    }
+
 }

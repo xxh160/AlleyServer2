@@ -1,6 +1,7 @@
 package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.CommentDataService;
+import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.vo.CommentVO;
@@ -37,6 +38,16 @@ public class CommentServiceImpl implements CommentService {
                 .stream()
                 .map(cur -> view(cur.getCommentId()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CommentVO comment(ChildCommentDTO childCommentDTO) {
+        return null;
+    }
+
+    @Override
+    public Object like(Integer commentId, Integer userId) {
+        return null;
     }
 
 }
