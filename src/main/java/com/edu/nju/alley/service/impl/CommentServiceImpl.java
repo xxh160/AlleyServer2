@@ -40,11 +40,13 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
+    //评论一条评论
     @Override
     public CommentVO comment(ChildCommentDTO childCommentDTO) {
         return null;
     }
 
+    //点赞或取消点赞评论
     @Override
     public Object like(Integer commentId, Integer userId) {
         return null;

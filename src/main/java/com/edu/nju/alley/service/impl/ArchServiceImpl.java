@@ -19,6 +19,7 @@ public class ArchServiceImpl implements ArchService {
     //查看建筑信息
     @Override
     public ArchVO view(Integer archId) {
+
         return null;
     }
 
