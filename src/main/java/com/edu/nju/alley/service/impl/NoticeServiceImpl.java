@@ -3,6 +3,7 @@ package com.edu.nju.alley.service.impl;
 import com.edu.nju.alley.dao.NoticeDataService;
 import com.edu.nju.alley.service.NoticeService;
 import com.edu.nju.alley.vo.NoticeVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     private final NoticeDataService noticeDataService;
 
+    @Autowired
     public NoticeServiceImpl(NoticeDataService noticeDataService) {
         this.noticeDataService = noticeDataService;
     }

@@ -5,6 +5,7 @@ import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.vo.CommentVO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentDataService commentDataService;
 
+    @Autowired
     public CommentServiceImpl(CommentDataService commentDataService) {
         this.commentDataService = commentDataService;
     }
