@@ -25,19 +25,27 @@ public class ArchServiceImpl implements ArchService {
     //查看建筑信息
     @Override
     public ArchVO view(Integer archId) {
-
+        //得到Arch基本信息
+        //得到Arch的评论
+        //得到Arch的图片
+        //得到Arch的评分
+        //生成ArchVO并返回
         return null;
     }
 
     //评论建筑
     @Override
     public CommentVO comment(ArchCommentDTO archCommentDTO) {
+        //向CommentPO中插入新的PO
+        //返回相应的VO
         return null;
     }
 
     //对建筑评分
     @Override
     public Object mark(Integer archId, Integer score) {
-        return null;
+        //向MarkPO中插入新的PO
+        //无返回
+        return markDataService.insertMark(archId,score);
     }
 }
