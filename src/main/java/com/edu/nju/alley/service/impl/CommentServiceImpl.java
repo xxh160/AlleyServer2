@@ -8,6 +8,7 @@ import com.edu.nju.alley.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +59,15 @@ public class CommentServiceImpl implements CommentService {
         //初始化likenum为0
         //创建CommentPO并插入
         //返回CommentVO
+
+        //获取当前时间
+        Date now=new Date();
+
+        //初始化likenum
+        Integer likenum=0;
+
+
+
         return null;
     }
 

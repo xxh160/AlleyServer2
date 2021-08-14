@@ -1,6 +1,7 @@
 package com.edu.nju.alley.po;
 
 import com.edu.nju.alley.constant.Const;
+import com.edu.nju.alley.dto.ChildCommentDTO;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class CommentPO {
 
     private Integer fatherId;
 
-    private Integer content;
+    private String content;
 
     private Integer likeNum;
 
@@ -25,6 +26,10 @@ public class CommentPO {
     private String picture;
 
     private static CommentPO nullComment;
+
+    public CommentPO() {
+
+    }
 
     public static CommentPO getNullInstance() {
         if (nullComment == null) {
@@ -42,4 +47,14 @@ public class CommentPO {
         return comment.getCommentId().equals(nullComment.getCommentId());
     }
 
+    public CommentPO(ChildCommentDTO childCommentDTO){
+        this.archId=childCommentDTO.getArchId();
+        this.userId=childCommentDTO.getUserId();
+        this.fatherId=childCommentDTO.getFatherId();
+        this.content=childCommentDTO.getContent();
+    }
+
+    public CommentPO buildPO(ChildCommentDTO childCommentDTO){
+        return null;
+    }
 }
