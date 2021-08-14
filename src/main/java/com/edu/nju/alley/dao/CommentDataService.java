@@ -16,4 +16,8 @@ public interface CommentDataService {
 
     void insertComment(CommentPO commentPO);
 
+    void likeUp(Integer commentId);
+
+    void likeDown(Integer commentId);
+
 }

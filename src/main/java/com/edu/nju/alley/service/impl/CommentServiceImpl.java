@@ -83,10 +83,12 @@ public class CommentServiceImpl implements CommentService {
         if(likeDataService.isExist(userId,commentId)){
             //删除点赞记录
             likeDataService.deleteLike(userId,commentId);
+            commentDataService.likeDown(commentId);
         }
         else{
             //插入一条点赞记录
             likeDataService.insertLike(userId,commentId);
+            commentDataService.likeUp(commentId);
         }
     }
 

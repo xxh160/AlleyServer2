@@ -51,4 +51,19 @@ public class CommentDataServiceImpl implements CommentDataService {
     public void insertComment(CommentPO commentPO) {
         commentMapper.insert(commentPO);
     }
+
+    @Override
+    public void likeUp(Integer commentId) {
+        CommentPO commentPO=commentMapper.selectByPrimaryKey(commentId).get();
+        commentPO.setLikeNum(commentPO.getLikeNum()+1);
+        commentMapper.updateByPrimaryKey(commentPO);
+    }
+
+    @Override
+    public void likeDown(Integer commentId) {
+        CommentPO commentPO=commentMapper.selectByPrimaryKey(commentId).get();
+        commentPO.setLikeNum(commentPO.getLikeNum()-1);
+        commentMapper.updateByPrimaryKey(commentPO);
+    }
+
 }
