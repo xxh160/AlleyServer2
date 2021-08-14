@@ -41,22 +41,30 @@ public class ArchServiceImpl implements ArchService {
         //得到Arch的评分
         //生成ArchVO并返回
 
+        //得到Arch基本信息
         ArchPO archPO=archDataService.getArch(archId);
 
+        //得到Arch的评论
         List<CommentVO> commentVOS=commentService.archComments(archId);
 
+        //得到Arch的图片
         List<ArchPicturePO> archPicturePOS=archDataService.getArchPicture(archId);
 
+        //得到Arch的图片
         List<String> picturePaths=archPicturePOS.stream()
                                     .map(ArchPicturePO::getPicture)
                                     .collect(Collectors.toList());
 
+        //得到Arch的评分
         List<MarkPO> markPOS=markDataService.getMarks(archId);
 
+        //评分记录的数量
         int length=markPOS.size();
 
+        //平均分
         double score=0;
 
+        //计算平均分
         for(MarkPO mark:markPOS){
             score+=mark.getScore();
         }
@@ -64,7 +72,6 @@ public class ArchServiceImpl implements ArchService {
         score/=length;
 
         //想个办法把他们组合起来
-
         return ArchVO.buildVO(archPO,score,picturePaths,commentVOS);
     }
 
