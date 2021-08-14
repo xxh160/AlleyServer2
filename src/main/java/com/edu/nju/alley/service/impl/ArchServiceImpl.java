@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArchServiceImpl implements ArchService {
@@ -44,13 +45,27 @@ public class ArchServiceImpl implements ArchService {
 
         List<CommentVO> commentVOS=commentService.archComments(archId);
 
-        ArchPicturePO archPicturePO=archDataService.getArchPicture(archId);
+        List<ArchPicturePO> archPicturePOS=archDataService.getArchPicture(archId);
+
+        List<String> picturePaths=archPicturePOS.stream()
+                                    .map(ArchPicturePO::getPicture)
+                                    .collect(Collectors.toList());
 
         List<MarkPO> markPOS=markDataService.getMarks(archId);
 
+        int length=markPOS.size();
+
+        double score=0;
+
+        for(MarkPO mark:markPOS){
+            score+=mark.getScore();
+        }
+
+        score/=length;
+
         //想个办法把他们组合起来
 
-        return null;
+        return ArchVO.buildVO(archPO,score,picturePaths,commentVOS);
     }
 
     //评论建筑

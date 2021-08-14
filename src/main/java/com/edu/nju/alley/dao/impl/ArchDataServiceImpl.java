@@ -9,6 +9,7 @@ import com.edu.nju.alley.po.ArchPicturePO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
@@ -33,8 +34,7 @@ public class ArchDataServiceImpl implements ArchDataService {
     }
 
     @Override
-    public ArchPicturePO getArchPicture(Integer archId) {
-        Optional<ArchPicturePO> archPictureOptional=archPictureMapper.selectOne(c->c.where(ArchPictureDSS.archId,isEqualTo(archId)));
-        return archPictureOptional.orElse(null);//好的这个我也不太清楚，总之是返回ArchPicturePO
+    public List<ArchPicturePO> getArchPicture(Integer archId) {
+        return archPictureMapper.select(c->c.where(ArchPictureDSS.archId,isEqualTo(archId)));
     }
 }
