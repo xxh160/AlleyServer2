@@ -60,14 +60,14 @@ public class CommentServiceImpl implements CommentService {
         //创建CommentPO并插入
         //返回CommentVO
 
-        //获取当前时间
-        Date now = new Date();
+        //创建commentPO
+        CommentPO commentPO=CommentPO.childComment(childCommentDTO);
 
-        //初始化likeNum
-        Integer likeNum = 0;
+        //插入commentPO
+        commentDataService.insertComment(commentPO);
 
-
-        return null;
+        //返回CommentVO
+        return CommentVO.buildVO(commentPO,null);//新的评论没有子评论，我先放个null在这里
     }
 
     //点赞或取消点赞评论

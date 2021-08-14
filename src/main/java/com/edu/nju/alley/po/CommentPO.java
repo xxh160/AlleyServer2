@@ -51,6 +51,13 @@ public class CommentPO {
         this.userId = childCommentDTO.getUserId();
         this.fatherId = childCommentDTO.getFatherId();
         this.content = childCommentDTO.getContent();
+        this.picture=childCommentDTO.getPicture();
+        this.likeNum=0;
+        this.createT=new Date();
+    }
+
+    public static CommentPO childComment(ChildCommentDTO childCommentDTO){
+        return new CommentPO(childCommentDTO);
     }
     
 }

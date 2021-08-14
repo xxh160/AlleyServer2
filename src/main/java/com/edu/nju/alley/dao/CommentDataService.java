@@ -14,4 +14,6 @@ public interface CommentDataService {
 
     CommentPO getComment(Integer commentId);
 
+    void insertComment(CommentPO commentPO);
+
 }

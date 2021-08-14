@@ -46,4 +46,9 @@ public class CommentDataServiceImpl implements CommentDataService {
         Optional<CommentPO> commentOptional = commentMapper.selectByPrimaryKey(commentId);
         return commentOptional.orElse(CommentPO.getNullInstance());
     }
+
+    @Override
+    public void insertComment(CommentPO commentPO) {
+        commentMapper.insert(commentPO);
+    }
 }
