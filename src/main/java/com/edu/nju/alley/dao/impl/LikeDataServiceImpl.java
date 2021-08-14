@@ -27,4 +27,15 @@ public class LikeDataServiceImpl implements LikeDataService {
         return likeOptional.isPresent();
     }
 
+    @Override
+    public void deleteLike(Integer userId, Integer commentId) {
+        likeMapper.deleteByPrimaryKey(userId, commentId);
+    }
+
+    @Override
+    public void insertLike(Integer userId, Integer commentId) {
+        LikePO likePO=new LikePO(userId,commentId);
+        likeMapper.insert(likePO);
+    }
+
 }

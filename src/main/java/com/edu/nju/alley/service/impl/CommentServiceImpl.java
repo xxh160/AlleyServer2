@@ -1,6 +1,7 @@
 package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.CommentDataService;
+import com.edu.nju.alley.dao.LikeDataService;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.service.CommentService;
@@ -17,9 +18,12 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentDataService commentDataService;
 
+    private final LikeDataService likeDataService;
+
     @Autowired
-    public CommentServiceImpl(CommentDataService commentDataService) {
+    public CommentServiceImpl(CommentDataService commentDataService,LikeDataService likeDataService) {
         this.commentDataService = commentDataService;
+        this.likeDataService=likeDataService;
     }
 
     @Override
@@ -75,6 +79,15 @@ public class CommentServiceImpl implements CommentService {
     public void like(Integer commentId, Integer userId) {
         //插入或删除一条LikePO
         //更新CommentPO中的likeNum
+        //如果已经点过赞
+        if(likeDataService.isExist(userId,commentId)){
+            //删除点赞记录
+            likeDataService.deleteLike(userId,commentId);
+        }
+        else{
+            //插入一条点赞记录
+            likeDataService.insertLike(userId,commentId);
+        }
     }
 
 }

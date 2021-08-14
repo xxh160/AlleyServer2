@@ -8,5 +8,10 @@ public class LikePO {
     private Integer userId;
 
     private Integer commentId;
+
+    public LikePO(Integer userId,Integer commentId){
+        this.userId=userId;
+        this.commentId=commentId;
+    }
     
 }
