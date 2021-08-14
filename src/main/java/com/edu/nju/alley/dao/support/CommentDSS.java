@@ -18,7 +18,7 @@ public final class CommentDSS {
 
     public static final SqlColumn<Integer> fatherId = commentPO.fatherId;
 
-    public static final SqlColumn<Integer> content = commentPO.content;
+    public static final SqlColumn<String> content = commentPO.content;
 
     public static final SqlColumn<Integer> likeNum = commentPO.likeNum;
 
@@ -35,7 +35,7 @@ public final class CommentDSS {
 
         public final SqlColumn<Integer> fatherId = column("father_id", JDBCType.INTEGER);
 
-        public final SqlColumn<Integer> content = column("content", JDBCType.INTEGER);
+        public final SqlColumn<String> content = column("content", JDBCType.VARCHAR);
 
         public final SqlColumn<Integer> likeNum = column("like_num", JDBCType.INTEGER);
 

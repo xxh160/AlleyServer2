@@ -33,7 +33,7 @@ public class ArchController {
     }
 
     @PostMapping("/mark/{archId}")
-    public ResponseVO<Object> mark(@PathVariable Integer archId, @RequestParam Integer score) {
+    public ResponseVO<Object> mark(@PathVariable Integer archId, @RequestParam Integer score, @RequestParam Integer userId) {
         return null;
     }
 

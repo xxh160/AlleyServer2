@@ -18,7 +18,6 @@ import org.mybatis.dynamic.sql.update.render.UpdateStatementProvider;
 import org.mybatis.dynamic.sql.util.SqlProviderAdapter;
 import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 
-import javax.annotation.Generated;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +49,7 @@ public interface CommentMapper {
             @Result(column = "arch_id", property = "archId", jdbcType = JdbcType.INTEGER),
             @Result(column = "user_id", property = "userId", jdbcType = JdbcType.INTEGER),
             @Result(column = "father_id", property = "fatherId", jdbcType = JdbcType.INTEGER),
-            @Result(column = "content", property = "content", jdbcType = JdbcType.INTEGER),
+            @Result(column = "content", property = "content", jdbcType = JdbcType.VARCHAR),
             @Result(column = "like_num", property = "likeNum", jdbcType = JdbcType.INTEGER),
             @Result(column = "create_t", property = "createT", jdbcType = JdbcType.TIMESTAMP),
             @Result(column = "picture", property = "picture", jdbcType = JdbcType.VARCHAR)
@@ -91,7 +90,6 @@ public interface CommentMapper {
         );
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insertMultiple(Collection<CommentPO> records) {
         return MyBatis3Utils.insertMultiple(this::insertMultiple, records, commentPO, c ->
                 c.map(commentId).toProperty("commentId")
@@ -105,7 +103,6 @@ public interface CommentMapper {
         );
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insertSelective(CommentPO record) {
         return MyBatis3Utils.insert(this::insert, record, commentPO, c ->
                 c.map(commentId).toPropertyWhenPresent("commentId", record::getCommentId)
@@ -119,34 +116,28 @@ public interface CommentMapper {
         );
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default Optional<CommentPO> selectOne(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectOne(this::selectOne, selectList, commentPO, completer);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default List<CommentPO> select(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectList(this::selectMany, selectList, commentPO, completer);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default List<CommentPO> selectDistinct(SelectDSLCompleter completer) {
         return MyBatis3Utils.selectDistinct(this::selectMany, selectList, commentPO, completer);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default Optional<CommentPO> selectByPrimaryKey(Integer commentId_) {
         return selectOne(c ->
                 c.where(commentId, isEqualTo(commentId_))
         );
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int update(UpdateDSLCompleter completer) {
         return MyBatis3Utils.update(this::update, commentPO, completer);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateAllColumns(CommentPO record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(commentId).equalTo(record::getCommentId)
                 .set(archId).equalTo(record::getArchId)
@@ -158,7 +149,6 @@ public interface CommentMapper {
                 .set(picture).equalTo(record::getPicture);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateSelectiveColumns(CommentPO record, UpdateDSL<UpdateModel> dsl) {
         return dsl.set(commentId).equalToWhenPresent(record::getCommentId)
                 .set(archId).equalToWhenPresent(record::getArchId)
@@ -170,7 +160,6 @@ public interface CommentMapper {
                 .set(picture).equalToWhenPresent(record::getPicture);
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKey(CommentPO record) {
         return update(c ->
                 c.set(archId).equalTo(record::getArchId)
@@ -184,7 +173,6 @@ public interface CommentMapper {
         );
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKeySelective(CommentPO record) {
         return update(c ->
                 c.set(archId).equalToWhenPresent(record::getArchId)

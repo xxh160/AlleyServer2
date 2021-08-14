@@ -28,7 +28,6 @@ public class CommentPO {
     private static CommentPO nullComment;
 
     public CommentPO() {
-
     }
 
     public static CommentPO getNullInstance() {
@@ -47,14 +46,11 @@ public class CommentPO {
         return comment.getCommentId().equals(nullComment.getCommentId());
     }
 
-    public CommentPO(ChildCommentDTO childCommentDTO){
-        this.archId=childCommentDTO.getArchId();
-        this.userId=childCommentDTO.getUserId();
-        this.fatherId=childCommentDTO.getFatherId();
-        this.content=childCommentDTO.getContent();
+    public CommentPO(ChildCommentDTO childCommentDTO) {
+        this.archId = childCommentDTO.getArchId();
+        this.userId = childCommentDTO.getUserId();
+        this.fatherId = childCommentDTO.getFatherId();
+        this.content = childCommentDTO.getContent();
     }
-
-    public CommentPO buildPO(ChildCommentDTO childCommentDTO){
-        return null;
-    }
+    
 }

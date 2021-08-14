@@ -48,7 +48,7 @@ public class CommentServiceImpl implements CommentService {
         return commentDataService
                 .getArchComments(archId)
                 .stream()
-                .map(cur->view(cur.getCommentId()))
+                .map(cur -> view(cur.getCommentId()))
                 .collect(Collectors.toList());
     }
 
@@ -56,16 +56,15 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentVO comment(ChildCommentDTO childCommentDTO) {
         //获得当前时间作为CreateT
-        //初始化likenum为0
+        //初始化likeNum为0
         //创建CommentPO并插入
         //返回CommentVO
 
         //获取当前时间
-        Date now=new Date();
+        Date now = new Date();
 
-        //初始化likenum
-        Integer likenum=0;
-
+        //初始化likeNum
+        Integer likeNum = 0;
 
 
         return null;
@@ -73,10 +72,9 @@ public class CommentServiceImpl implements CommentService {
 
     //点赞或取消点赞评论
     @Override
-    public Object like(Integer commentId, Integer userId) {
+    public void like(Integer commentId, Integer userId) {
         //插入或删除一条LikePO
         //更新CommentPO中的likeNum
-        return null;
     }
 
 }

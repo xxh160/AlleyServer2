@@ -95,6 +95,12 @@ paths:
               - 3
               - 4
               - 5
+        - name: userId
+          in: query
+          required: true
+          description: 评分用户的 id
+          schema:
+            type: integer
       responses:
         200:
           description: success

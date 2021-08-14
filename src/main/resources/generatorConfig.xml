@@ -39,9 +39,9 @@
         <!--        <table tableName="arch" domainObjectName="ArchPO" enableCountByExample="false"-->
         <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--               selectByExampleQueryId="false"/>-->
-        <!--        <table tableName="comment" domainObjectName="CommentPO" enableCountByExample="false"-->
-        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
-        <!--               selectByExampleQueryId="false"/>-->
+        <table tableName="comment" domainObjectName="CommentPO" enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false"/>
         <!--        <table tableName="like" domainObjectName="LikePO" enableCountByExample="false"-->
         <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--               selectByExampleQueryId="false"/>-->
@@ -54,8 +54,8 @@
         <!--        <table tableName="user_info" domainObjectName="UserPO" enableCountByExample="false"-->
         <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
         <!--               selectByExampleQueryId="false"/>-->
-        <table tableName="arch_picture" domainObjectName="ArchPicture" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"/>
+        <!--        <table tableName="arch_picture" domainObjectName="ArchPicture" enableCountByExample="false"-->
+        <!--               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+        <!--               selectByExampleQueryId="false"/>-->
     </context>
 </generatorConfiguration>

@@ -26,10 +26,10 @@ public class ArchServiceImpl implements ArchService {
     private final CommentService commentService;
 
     @Autowired
-    public ArchServiceImpl(ArchDataService archDataService,MarkDataService markDataService,CommentService commentService){
-        this.archDataService=archDataService;
-        this.markDataService=markDataService;
-        this.commentService=commentService;
+    public ArchServiceImpl(ArchDataService archDataService, MarkDataService markDataService, CommentService commentService) {
+        this.archDataService = archDataService;
+        this.markDataService = markDataService;
+        this.commentService = commentService;
     }
 
     //查看建筑信息
@@ -42,52 +42,54 @@ public class ArchServiceImpl implements ArchService {
         //生成ArchVO并返回
 
         //得到Arch基本信息
-        ArchPO archPO=archDataService.getArch(archId);
+        ArchPO archPO = archDataService.getArch(archId);
 
-        //得到Arch的评论
-        List<CommentVO> commentVOS=commentService.archComments(archId);
+        // 得到Arch的评论
+        List<CommentVO> commentVOS = commentService.archComments(archId);
 
-        //得到Arch的图片
-        List<ArchPicturePO> archPicturePOS=archDataService.getArchPicture(archId);
+        // 得到Arch的图片
+        List<ArchPicturePO> archPicturePOS = archDataService.getArchPicture(archId);
 
-        //得到Arch的图片
-        List<String> picturePaths=archPicturePOS.stream()
-                                    .map(ArchPicturePO::getPicture)
-                                    .collect(Collectors.toList());
+        // 得到Arch的图片
+        List<String> picturePaths = archPicturePOS.stream()
+                .map(ArchPicturePO::getPicture)
+                .collect(Collectors.toList());
 
-        //得到Arch的评分
-        List<MarkPO> markPOS=markDataService.getMarks(archId);
+        // 得到Arch的评分
+        List<MarkPO> markPOS = markDataService.getMarks(archId);
 
-        //评分记录的数量
-        int length=markPOS.size();
+        // 评分记录的数量
+        int length = markPOS.size();
 
-        //平均分
-        double score=0;
+        // 平均分
+        double score = 0;
 
-        //计算平均分
-        for(MarkPO mark:markPOS){
-            score+=mark.getScore();
+        // 计算平均分
+        for (MarkPO mark : markPOS) {
+            score += mark.getScore();
         }
 
-        score/=length;
+        score /= length;
 
-        //想个办法把他们组合起来
-        return ArchVO.buildVO(archPO,score,picturePaths,commentVOS);
+        // 想个办法把他们组合起来
+        return ArchVO.buildVO(archPO, score, picturePaths, commentVOS);
     }
 
     //评论建筑
     @Override
     public CommentVO comment(ArchCommentDTO archCommentDTO) {
-        //向CommentPO中插入新的PO
-        //返回相应的VO
+        // 向CommentPO中插入新的PO
+        // 返回相应的VO
         return null;
     }
 
-    //对建筑评分
+    // 对建筑评分
     @Override
-    public Object mark(Integer archId, Integer score) {
-        //向MarkPO中插入新的PO
-        //无返回
-        return markDataService.insertMark(archId,score);
+    public void mark(Integer archId, Integer score, Integer userId) {
+        // 向MarkPO中插入新的PO
+        // 无返回
+        // TODO: markDataService 得改一下
+        markDataService.insertMark(archId, score);
     }
+
 }

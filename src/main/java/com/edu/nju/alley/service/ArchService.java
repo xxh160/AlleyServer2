@@ -10,6 +10,6 @@ public interface ArchService {
 
     CommentVO comment(ArchCommentDTO archCommentDTO);
 
-    Object mark(Integer archId,Integer score);
+    void mark(Integer archId, Integer score, Integer userId);
 
 }

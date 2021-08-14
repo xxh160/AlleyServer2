@@ -16,6 +16,6 @@ public interface CommentService {
 
     CommentVO comment(ChildCommentDTO childCommentDTO);
 
-    Object like(Integer commentId,Integer userId);
+    void like(Integer commentId, Integer userId);
 
 }

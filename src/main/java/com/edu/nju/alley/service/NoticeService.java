@@ -9,6 +9,6 @@ public interface NoticeService {
     // api 设计严重失误
     List<NoticeVO> userNotices(Integer userId);
 
-    Object read(Integer noticeId);
+    void read(Integer noticeId);
 
 }

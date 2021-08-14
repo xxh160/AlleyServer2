@@ -38,7 +38,7 @@ public class CommentDataServiceImpl implements CommentDataService {
     @Override
     public List<CommentPO> getArchComments(Integer archId) {
         return commentMapper
-                .select(c->c.where(CommentDSS.archId,isEqualTo(archId),and(CommentDSS.fatherId,isEqualTo(-1))));
+                .select(c -> c.where(CommentDSS.archId, isEqualTo(archId), and(CommentDSS.fatherId, isEqualTo(-1))));
     }
 
     @Override
