@@ -1,6 +1,7 @@
 package com.edu.nju.alley.po;
 
 import com.edu.nju.alley.constant.Const;
+import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import lombok.Data;
 
@@ -56,8 +57,20 @@ public class CommentPO {
         this.createT=new Date();
     }
 
+    public CommentPO(ArchCommentDTO archCommentDTO){
+        this.archId=archCommentDTO.getArchId();
+        this.userId=archCommentDTO.getUserId();
+        this.fatherId=-1;
+        this.content=archCommentDTO.getContent();
+        this.picture=archCommentDTO.getPicture();
+        this.likeNum=0;
+        this.createT=new Date();
+    }
+
+
     public static CommentPO childComment(ChildCommentDTO childCommentDTO){
         return new CommentPO(childCommentDTO);
     }
-    
+
+    public static CommentPO archComment(ArchCommentDTO archCommentDTO){return new CommentPO(archCommentDTO);}
 }

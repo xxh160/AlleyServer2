@@ -1,10 +1,12 @@
 package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.ArchDataService;
+import com.edu.nju.alley.dao.CommentDataService;
 import com.edu.nju.alley.dao.MarkDataService;
 import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.po.ArchPO;
 import com.edu.nju.alley.po.ArchPicturePO;
+import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.po.MarkPO;
 import com.edu.nju.alley.service.ArchService;
 import com.edu.nju.alley.service.CommentService;
@@ -25,11 +27,14 @@ public class ArchServiceImpl implements ArchService {
 
     private final CommentService commentService;
 
+    private final CommentDataService commentDataService;
+
     @Autowired
-    public ArchServiceImpl(ArchDataService archDataService, MarkDataService markDataService, CommentService commentService) {
+    public ArchServiceImpl(ArchDataService archDataService, MarkDataService markDataService, CommentService commentService,CommentDataService commentDataService) {
         this.archDataService = archDataService;
         this.markDataService = markDataService;
         this.commentService = commentService;
+        this.commentDataService=commentDataService;
     }
 
     //查看建筑信息
@@ -80,7 +85,15 @@ public class ArchServiceImpl implements ArchService {
     public CommentVO comment(ArchCommentDTO archCommentDTO) {
         // 向CommentPO中插入新的PO
         // 返回相应的VO
-        return null;
+
+        //创建CommentPO
+        CommentPO commentPO=new CommentPO(archCommentDTO);
+
+        //插入CommentPO
+        commentDataService.insertComment(commentPO);
+
+        //返回CommentVO,新的CommentPO没有评论,先放个null在这里
+        return CommentVO.buildVO(commentPO,null);
     }
 
     // 对建筑评分
