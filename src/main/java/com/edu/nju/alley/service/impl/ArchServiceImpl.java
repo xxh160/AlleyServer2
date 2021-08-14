@@ -11,10 +11,12 @@ import com.edu.nju.alley.po.MarkPO;
 import com.edu.nju.alley.service.ArchService;
 import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.vo.ArchVO;
+import com.edu.nju.alley.vo.ArchViewVO;
 import com.edu.nju.alley.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,6 +105,16 @@ public class ArchServiceImpl implements ArchService {
         // 无返回
         // TODO: markDataService 得改一下
         markDataService.insertMark(archId, score,userId);
+    }
+
+    @Override
+    public List<ArchViewVO> all() {
+        List<ArchPO> archPOS=archDataService.all();
+        List<ArchViewVO> archViewVOS=new ArrayList<>();
+        for(ArchPO archPO:archPOS){
+            archViewVOS.add(new ArchViewVO(archPO));
+        }
+        return archViewVOS;
     }
 
 }

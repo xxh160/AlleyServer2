@@ -3,6 +3,7 @@ package com.edu.nju.alley.dao.impl;
 import com.edu.nju.alley.dao.ArchDataService;
 import com.edu.nju.alley.dao.mapper.ArchMapper;
 import com.edu.nju.alley.dao.mapper.ArchPictureMapper;
+import com.edu.nju.alley.dao.support.ArchDSS;
 import com.edu.nju.alley.dao.support.ArchPictureDSS;
 import com.edu.nju.alley.po.ArchPO;
 import com.edu.nju.alley.po.ArchPicturePO;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
+import static org.mybatis.dynamic.sql.SqlBuilder.isNotEqualTo;
 
 @Service
 public class ArchDataServiceImpl implements ArchDataService {
@@ -36,5 +38,10 @@ public class ArchDataServiceImpl implements ArchDataService {
     @Override
     public List<ArchPicturePO> getArchPicture(Integer archId) {
         return archPictureMapper.select(c->c.where(ArchPictureDSS.archId,isEqualTo(archId)));
+    }
+
+    @Override
+    public List<ArchPO> all() {
+        return archMapper.select(c->c);
     }
 }
