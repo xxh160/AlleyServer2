@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mybatis.dynamic.sql.SqlBuilder.and;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 @Service
@@ -32,6 +33,12 @@ public class CommentDataServiceImpl implements CommentDataService {
     public List<CommentPO> getChildComments(Integer commentId) {
         return commentMapper
                 .select(c -> c.where(CommentDSS.fatherId, isEqualTo(commentId)));
+    }
+
+    @Override
+    public List<CommentPO> getArchComments(Integer archId) {
+        return commentMapper
+                .select(c->c.where(CommentDSS.archId,isEqualTo(archId),and(CommentDSS.fatherId,isEqualTo(-1))));
     }
 
     @Override

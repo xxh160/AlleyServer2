@@ -42,6 +42,15 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<CommentVO> archComments(Integer archId) {
+        return commentDataService
+                .getArchComments(archId)
+                .stream()
+                .map(cur->view(cur.getCommentId()))
+                .collect(Collectors.toList());
+    }
+
     //评论一条评论
     @Override
     public CommentVO comment(ChildCommentDTO childCommentDTO) {

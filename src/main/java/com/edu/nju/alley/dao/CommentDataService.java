@@ -10,6 +10,8 @@ public interface CommentDataService {
 
     List<CommentPO> getChildComments(Integer commentId);
 
+    List<CommentPO> getArchComments(Integer archId);
+
     CommentPO getComment(Integer commentId);
 
 }

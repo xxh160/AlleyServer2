@@ -12,6 +12,8 @@ public interface CommentService {
     // api 设计严重失误
     List<CommentVO> userComments(Integer userId);
 
+    List<CommentVO> archComments(Integer archId);
+
     CommentVO comment(ChildCommentDTO childCommentDTO);
 
     Object like(Integer commentId,Integer userId);
