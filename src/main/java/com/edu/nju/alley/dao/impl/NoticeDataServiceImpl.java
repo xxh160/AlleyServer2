@@ -25,4 +25,12 @@ public class NoticeDataServiceImpl implements NoticeDataService {
                 .select(c -> c.where(NoticeDSS.userId, isEqualTo(userId)));
     }
 
+    @Override
+    public void read(Integer noticeId) {
+        //注意这里没有检查noticeId对应的notice是否存在
+        NoticePO noticePO=noticeMapper.selectByPrimaryKey(noticeId).get();
+        noticePO.setIsUnread(true);
+        noticeMapper.updateByPrimaryKey(noticePO);
+    }
+
 }
