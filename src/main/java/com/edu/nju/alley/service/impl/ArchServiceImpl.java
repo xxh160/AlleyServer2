@@ -102,7 +102,7 @@ public class ArchServiceImpl implements ArchService {
         // 向MarkPO中插入新的PO
         // 无返回
         // TODO: markDataService 得改一下
-        markDataService.insertMark(archId, score);
+        markDataService.insertMark(archId, score,userId);
     }
 
 }

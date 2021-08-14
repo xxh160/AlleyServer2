@@ -22,10 +22,10 @@ public class MarkDataServiceImpl implements MarkDataService {
     }
 
     @Override
-    public Object insertMark(Integer archId, Integer score) {
-
-
-        return null;
+    public void insertMark(Integer archId, Integer score,Integer userId) {
+        //插入一条MarkPO
+        MarkPO markPO=new MarkPO(userId,archId,score);
+        markMapper.insert(markPO);
     }
 
     @Override

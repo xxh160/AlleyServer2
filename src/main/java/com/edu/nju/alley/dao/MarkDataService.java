@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MarkDataService {
 
-    Object insertMark(Integer archId,Integer score);
+    void insertMark(Integer archId,Integer score,Integer userId);
 
     List<MarkPO> getMarks(Integer archId);
 }
