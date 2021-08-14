@@ -21,7 +21,8 @@ public class NoticeController {
 
     @PostMapping("/read/{noticeId}")
     public ResponseVO<Object> read(@PathVariable Integer noticeId) {
-        return null;
+        noticeService.read(noticeId);
+        return ResponseVO.success();
     }
 
 }

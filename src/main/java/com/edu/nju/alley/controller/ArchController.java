@@ -24,22 +24,29 @@ public class ArchController {
 
     @GetMapping("/view/{archId}")
     public ResponseVO<ArchVO> view(@PathVariable Integer archId) {
-        return null;
+        return ResponseVO
+                .<ArchVO>success()
+                .data(archService.view(archId));
     }
 
     @PostMapping("/comment")
     public ResponseVO<CommentVO> comment(@RequestBody ArchCommentDTO archCommentDTO) {
-        return null;
+        return ResponseVO
+                .<CommentVO>success()
+                .data(archService.comment(archCommentDTO));
     }
 
     @PostMapping("/mark/{archId}")
     public ResponseVO<Object> mark(@PathVariable Integer archId, @RequestParam Integer score, @RequestParam Integer userId) {
-        return null;
+        archService.mark(archId,score,userId);
+        return ResponseVO.success();
     }
 
     @GetMapping("/all")
     public ResponseVO<List<ArchViewVO>> all() {
-        return null;
+        return ResponseVO
+                .<List<ArchViewVO>>success()
+                .data(archService.all());
     }
 
 }

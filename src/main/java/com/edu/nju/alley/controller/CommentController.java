@@ -20,12 +20,15 @@ public class CommentController {
 
     @PostMapping("/comment")
     public ResponseVO<CommentVO> comment(@RequestBody ChildCommentDTO childCommentDTO) {
-        return null;
+        return ResponseVO
+                .<CommentVO>success()
+                .data(commentService.comment(childCommentDTO));
     }
 
     @PostMapping("/like/{commentId}")
     public ResponseVO<Object> like(@PathVariable Integer commentId, @RequestParam Integer userId) {
-        return null;
+        commentService.like(commentId,userId);
+        return ResponseVO.success();
     }
 
     @GetMapping("/view/{commentId}")
