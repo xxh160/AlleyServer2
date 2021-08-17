@@ -11,9 +11,9 @@ public class MarkPO {
 
     private Integer score;
 
-    public MarkPO(Integer userId,Integer archId,Integer score){
-        this.userId=userId;
-        this.archId=archId;
-        this.score=score;
+    public MarkPO(Integer userId, Integer archId, Integer score) {
+        this.userId = userId;
+        this.archId = archId;
+        this.score = score;
     }
 }

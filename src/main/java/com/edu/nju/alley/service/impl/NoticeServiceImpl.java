@@ -19,6 +19,12 @@ public class NoticeServiceImpl implements NoticeService {
         this.noticeDataService = noticeDataService;
     }
 
+    /**
+     * 返回用户的通知
+     *
+     * @param userId 用户 id
+     * @return 通知列表
+     */
     @Override
     public List<NoticeVO> userNotices(Integer userId) {
         return noticeDataService
@@ -28,13 +34,17 @@ public class NoticeServiceImpl implements NoticeService {
                 .collect(Collectors.toList());
     }
 
-    //阅读通知并标记通知为已读
+    /**
+     * 阅读通知并标记通知为已读
+     *
+     * @param noticeId 通知 id
+     */
     @Override
     public void read(Integer noticeId) {
         // 更新 NoticePO 的 isUnread 属性
         // Q: 诶这里不应该返回通知的内容吗
-        noticeDataService.read(noticeId);
         // A: read 的作用是标识为已读 在 userService 里有一个返回用户所有通知的方法 在那里内容就返回了
+        noticeDataService.read(noticeId);
     }
 
 }

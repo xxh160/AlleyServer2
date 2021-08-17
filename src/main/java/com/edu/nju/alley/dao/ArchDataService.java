@@ -11,5 +11,5 @@ public interface ArchDataService {
 
     List<ArchPicturePO> getArchPicture(Integer archId);
 
-    List<ArchPO> all();
+    List<ArchPO> getAll();
 }

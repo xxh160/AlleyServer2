@@ -16,10 +16,10 @@ public class ArchViewVO {
 
     private String latitude;
 
-    public ArchViewVO(ArchPO archPO){
-        this.archId=archPO.getArchId();
-        this.longitude=archPO.getLongitude();
-        this.latitude=archPO.getLatitude();
+    public ArchViewVO(ArchPO archPO) {
+        this.archId = archPO.getArchId();
+        this.longitude = archPO.getLongitude();
+        this.latitude = archPO.getLatitude();
     }
 
 }

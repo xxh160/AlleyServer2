@@ -1,12 +1,15 @@
 package com.edu.nju.alley.dao.impl;
 
+import com.edu.nju.alley.constant.ReturnMessage;
 import com.edu.nju.alley.dao.NoticeDataService;
 import com.edu.nju.alley.dao.mapper.NoticeMapper;
 import com.edu.nju.alley.dao.support.NoticeDSS;
+import com.edu.nju.alley.exp.NoSuchDataException;
 import com.edu.nju.alley.po.NoticePO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
@@ -27,8 +30,9 @@ public class NoticeDataServiceImpl implements NoticeDataService {
 
     @Override
     public void read(Integer noticeId) {
-        //注意这里没有检查noticeId对应的notice是否存在
-        NoticePO noticePO=noticeMapper.selectByPrimaryKey(noticeId).get();
+        Optional<NoticePO> optional = noticeMapper.selectByPrimaryKey(noticeId);
+        if (optional.isEmpty()) throw new NoSuchDataException(ReturnMessage.NoSuchNoticeExp.getMsg());
+        NoticePO noticePO = optional.get();
         noticePO.setIsUnread(true);
         noticeMapper.updateByPrimaryKey(noticePO);
     }

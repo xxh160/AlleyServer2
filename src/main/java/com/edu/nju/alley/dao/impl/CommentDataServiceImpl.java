@@ -1,8 +1,10 @@
 package com.edu.nju.alley.dao.impl;
 
+import com.edu.nju.alley.constant.ReturnMessage;
 import com.edu.nju.alley.dao.CommentDataService;
 import com.edu.nju.alley.dao.mapper.CommentMapper;
 import com.edu.nju.alley.dao.support.CommentDSS;
+import com.edu.nju.alley.exp.NoSuchDataException;
 import com.edu.nju.alley.po.CommentPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,15 +56,19 @@ public class CommentDataServiceImpl implements CommentDataService {
 
     @Override
     public void likeUp(Integer commentId) {
-        CommentPO commentPO=commentMapper.selectByPrimaryKey(commentId).get();
-        commentPO.setLikeNum(commentPO.getLikeNum()+1);
+        Optional<CommentPO> optional = commentMapper.selectByPrimaryKey(commentId);
+        if (optional.isEmpty()) throw new NoSuchDataException(ReturnMessage.NoSuchCommentExp.getMsg());
+        CommentPO commentPO = optional.get();
+        commentPO.setLikeNum(commentPO.getLikeNum() + 1);
         commentMapper.updateByPrimaryKey(commentPO);
     }
 
     @Override
     public void likeDown(Integer commentId) {
-        CommentPO commentPO=commentMapper.selectByPrimaryKey(commentId).get();
-        commentPO.setLikeNum(commentPO.getLikeNum()-1);
+        Optional<CommentPO> optional = commentMapper.selectByPrimaryKey(commentId);
+        if (optional.isEmpty()) throw new NoSuchDataException(ReturnMessage.NoSuchCommentExp.getMsg());
+        CommentPO commentPO = optional.get();
+        commentPO.setLikeNum(commentPO.getLikeNum() - 1);
         commentMapper.updateByPrimaryKey(commentPO);
     }
 

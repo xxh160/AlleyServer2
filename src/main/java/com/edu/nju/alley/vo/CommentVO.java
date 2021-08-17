@@ -23,6 +23,8 @@ public class CommentVO {
 
     private Integer likeNum;
 
+    private String content;
+
     private Date createT;
 
     private String picture;
@@ -35,6 +37,7 @@ public class CommentVO {
                 comment.getFatherId(),
                 comment.getUserId(),
                 comment.getLikeNum(),
+                comment.getContent(),
                 comment.getCreateT(),
                 comment.getPicture(),
                 children);

@@ -4,10 +4,12 @@ import com.edu.nju.alley.constant.Const;
 import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
+@NoArgsConstructor
 public class CommentPO {
 
     private Integer commentId;
@@ -26,25 +28,14 @@ public class CommentPO {
 
     private String picture;
 
-    private static CommentPO nullComment;
-
-    public CommentPO() {
-    }
-
     public static CommentPO getNullInstance() {
-        if (nullComment == null) {
-            nullComment = new CommentPO();
-            nullComment.setCommentId(Integer.parseInt(Const.NullInstanceId.getId()));
-        }
+        CommentPO nullComment = new CommentPO();
+        nullComment.setCommentId(Integer.parseInt(Const.NullInstanceId.getId()));
         return nullComment;
     }
 
     public static boolean isNullInstance(CommentPO comment) {
-        if (nullComment == null) {
-            nullComment = new CommentPO();
-            nullComment.setCommentId(Integer.parseInt(Const.NullInstanceId.getId()));
-        }
-        return comment.getCommentId().equals(nullComment.getCommentId());
+        return comment.getCommentId().equals(Integer.parseInt(Const.NullInstanceId.getId()));
     }
 
     public CommentPO(ChildCommentDTO childCommentDTO) {
@@ -52,25 +43,26 @@ public class CommentPO {
         this.userId = childCommentDTO.getUserId();
         this.fatherId = childCommentDTO.getFatherId();
         this.content = childCommentDTO.getContent();
-        this.picture=childCommentDTO.getPicture();
-        this.likeNum=0;
-        this.createT=new Date();
+        this.picture = childCommentDTO.getPicture();
+        this.likeNum = Integer.parseInt(Const.NullLikeNum.getId());
+        this.createT = new Date();
     }
 
-    public CommentPO(ArchCommentDTO archCommentDTO){
-        this.archId=archCommentDTO.getArchId();
-        this.userId=archCommentDTO.getUserId();
-        this.fatherId=-1;
-        this.content=archCommentDTO.getContent();
-        this.picture=archCommentDTO.getPicture();
-        this.likeNum=0;
-        this.createT=new Date();
+    public CommentPO(ArchCommentDTO archCommentDTO) {
+        this.archId = archCommentDTO.getArchId();
+        this.userId = archCommentDTO.getUserId();
+        this.fatherId = Integer.parseInt(Const.NullFatherId.getId());
+        this.content = archCommentDTO.getContent();
+        this.picture = archCommentDTO.getPicture();
+        this.likeNum = Integer.parseInt(Const.NullLikeNum.getId());
+        this.createT = new Date();
     }
 
-
-    public static CommentPO childComment(ChildCommentDTO childCommentDTO){
+    public static CommentPO childComment(ChildCommentDTO childCommentDTO) {
         return new CommentPO(childCommentDTO);
     }
 
-    public static CommentPO archComment(ArchCommentDTO archCommentDTO){return new CommentPO(archCommentDTO);}
+    public static CommentPO archComment(ArchCommentDTO archCommentDTO) {
+        return new CommentPO(archCommentDTO);
+    }
 }

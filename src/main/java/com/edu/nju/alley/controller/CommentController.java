@@ -22,12 +22,12 @@ public class CommentController {
     public ResponseVO<CommentVO> comment(@RequestBody ChildCommentDTO childCommentDTO) {
         return ResponseVO
                 .<CommentVO>success()
-                .data(commentService.comment(childCommentDTO));
+                .data(commentService.commentComment(childCommentDTO));
     }
 
     @PostMapping("/like/{commentId}")
     public ResponseVO<Object> like(@PathVariable Integer commentId, @RequestParam Integer userId) {
-        commentService.like(commentId,userId);
+        commentService.like(commentId, userId);
         return ResponseVO.success();
     }
 

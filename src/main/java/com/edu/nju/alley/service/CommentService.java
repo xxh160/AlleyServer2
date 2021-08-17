@@ -1,5 +1,6 @@
 package com.edu.nju.alley.service;
 
+import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.vo.CommentVO;
 
@@ -9,12 +10,13 @@ public interface CommentService {
 
     CommentVO view(Integer commentId);
 
-    // api 设计严重失误
     List<CommentVO> userComments(Integer userId);
 
     List<CommentVO> archComments(Integer archId);
 
-    CommentVO comment(ChildCommentDTO childCommentDTO);
+    CommentVO commentComment(ChildCommentDTO childCommentDTO);
+
+    CommentVO commentArch(ArchCommentDTO archCommentDTO);
 
     void like(Integer commentId, Integer userId);
 

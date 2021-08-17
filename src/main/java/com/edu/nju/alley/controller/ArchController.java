@@ -2,6 +2,7 @@ package com.edu.nju.alley.controller;
 
 import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.service.ArchService;
+import com.edu.nju.alley.service.CommentService;
 import com.edu.nju.alley.vo.ArchVO;
 import com.edu.nju.alley.vo.ArchViewVO;
 import com.edu.nju.alley.vo.CommentVO;
@@ -16,10 +17,13 @@ import java.util.List;
 public class ArchController {
 
     private final ArchService archService;
+    private final CommentService commentService;
 
     @Autowired
-    public ArchController(ArchService archService) {
+    public ArchController(ArchService archService,
+                          CommentService commentService) {
         this.archService = archService;
+        this.commentService = commentService;
     }
 
     @GetMapping("/view/{archId}")
@@ -33,12 +37,12 @@ public class ArchController {
     public ResponseVO<CommentVO> comment(@RequestBody ArchCommentDTO archCommentDTO) {
         return ResponseVO
                 .<CommentVO>success()
-                .data(archService.comment(archCommentDTO));
+                .data(commentService.commentArch(archCommentDTO));
     }
 
     @PostMapping("/mark/{archId}")
     public ResponseVO<Object> mark(@PathVariable Integer archId, @RequestParam Integer score, @RequestParam Integer userId) {
-        archService.mark(archId,score,userId);
+        archService.mark(archId, score, userId);
         return ResponseVO.success();
     }
 

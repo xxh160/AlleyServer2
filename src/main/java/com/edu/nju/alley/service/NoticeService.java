@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface NoticeService {
 
-    // api 设计严重失误
     List<NoticeVO> userNotices(Integer userId);
 
     void read(Integer noticeId);

@@ -34,7 +34,7 @@ public class LikeDataServiceImpl implements LikeDataService {
 
     @Override
     public void insertLike(Integer userId, Integer commentId) {
-        LikePO likePO=new LikePO(userId,commentId);
+        LikePO likePO = new LikePO(userId, commentId);
         likeMapper.insert(likePO);
     }
 

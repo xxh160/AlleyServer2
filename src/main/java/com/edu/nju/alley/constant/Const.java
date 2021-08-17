@@ -9,7 +9,8 @@ public enum Const {
     NullInstanceId("-1"),
     NullFatherId("-1"),
     NullPicUrl("-2"),
-    NullOpenId("null");
+    NullOpenId("null"),
+    NullLikeNum("0");
 
     private final String id;
 

@@ -36,6 +36,12 @@ public class UserServiceImpl implements UserService {
         this.likeDataService = likeDataService;
     }
 
+    /**
+     * 用户登录
+     *
+     * @param userLoginDTO 登录信息
+     * @return 用户信息
+     */
     @Override
     public UserVO login(UserLoginDTO userLoginDTO) {
         // 调用微信登录 api
@@ -67,6 +73,12 @@ public class UserServiceImpl implements UserService {
         return UserVO.buildVO(user);
     }
 
+    /**
+     * 查看用户信息
+     *
+     * @param userId 用户 id
+     * @return 用户信息
+     */
     @Override
     public UserVO view(Integer userId) {
         UserPO user = userDataService.getUser(userId);
@@ -74,6 +86,12 @@ public class UserServiceImpl implements UserService {
         return UserVO.buildVO(user);
     }
 
+    /**
+     * 更新用户信息
+     *
+     * @param userDTO 用户信息
+     * @return 用户信息
+     */
     @Override
     public UserVO update(UserDTO userDTO) {
         UserPO user = userDataService.getUser(userDTO.getUserId());
@@ -83,6 +101,13 @@ public class UserServiceImpl implements UserService {
         return UserVO.buildVO(user);
     }
 
+    /**
+     * 用户是否点赞
+     *
+     * @param userId    用户 id
+     * @param commentId 评论 id
+     * @return 是否点赞
+     */
     @Override
     public LikeVO isLike(Integer userId, Integer commentId) {
         return new LikeVO(userId, commentId, likeDataService.isExist(userId, commentId));

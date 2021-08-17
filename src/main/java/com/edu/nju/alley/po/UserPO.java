@@ -23,33 +23,21 @@ public class UserPO {
         this.gender = gender;
         this.avatar = avatar;
     }
-
-    private static UserPO nullUser;
-
-    private static UserPO defaultUser;
-
+    
     public static UserPO getNullInstance() {
-        if (nullUser == null) {
-            nullUser = new UserPO();
-            nullUser.setUserId(Integer.parseInt(Const.NullInstanceId.getId()));
-        }
+        UserPO nullUser = new UserPO();
+        nullUser.setUserId(Integer.parseInt(Const.NullInstanceId.getId()));
         return nullUser;
     }
 
     public static boolean isNullInstance(UserPO userPO) {
-        if (nullUser == null) {
-            nullUser = new UserPO();
-            nullUser.setUserId(Integer.parseInt(Const.NullInstanceId.getId()));
-        }
-        return userPO.getUserId().equals(nullUser.getUserId());
+        return userPO.getUserId().equals(Integer.parseInt(Const.NullInstanceId.getId()));
     }
 
     public static UserPO getDefaultInstance(String openId) {
-        if (defaultUser == null) {
-            defaultUser = new UserPO();
-            defaultUser.setOpenId(openId);
-            defaultUser.setLocateAuth(false);
-        }
+        UserPO defaultUser = new UserPO();
+        defaultUser.setOpenId(openId);
+        defaultUser.setLocateAuth(false);
         return defaultUser;
     }
 

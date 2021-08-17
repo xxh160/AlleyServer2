@@ -1,22 +1,19 @@
 package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.ArchDataService;
-import com.edu.nju.alley.dao.CommentDataService;
 import com.edu.nju.alley.dao.MarkDataService;
-import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.po.ArchPO;
 import com.edu.nju.alley.po.ArchPicturePO;
-import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.po.MarkPO;
 import com.edu.nju.alley.service.ArchService;
 import com.edu.nju.alley.service.CommentService;
+import com.edu.nju.alley.util.DoubleUtil;
 import com.edu.nju.alley.vo.ArchVO;
 import com.edu.nju.alley.vo.ArchViewVO;
 import com.edu.nju.alley.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,97 +21,72 @@ import java.util.stream.Collectors;
 public class ArchServiceImpl implements ArchService {
 
     private final ArchDataService archDataService;
-
     private final MarkDataService markDataService;
-
     private final CommentService commentService;
 
-    private final CommentDataService commentDataService;
-
     @Autowired
-    public ArchServiceImpl(ArchDataService archDataService, MarkDataService markDataService, CommentService commentService,CommentDataService commentDataService) {
+    public ArchServiceImpl(ArchDataService archDataService,
+                           MarkDataService markDataService,
+                           CommentService commentService) {
         this.archDataService = archDataService;
         this.markDataService = markDataService;
         this.commentService = commentService;
-        this.commentDataService=commentDataService;
     }
 
-    //查看建筑信息
+    /**
+     * 查看建筑信息
+     *
+     * @param archId 建筑 id
+     * @return 建筑信息
+     */
     @Override
     public ArchVO view(Integer archId) {
-        //得到Arch基本信息
-        //得到Arch的评论
-        //得到Arch的图片
-        //得到Arch的评分
-        //生成ArchVO并返回
-
-        //得到Arch基本信息
+        // 得到 Arch 基本信息
         ArchPO archPO = archDataService.getArch(archId);
-
-        // 得到Arch的评论
-        List<CommentVO> commentVOS = commentService.archComments(archId);
-
-        // 得到Arch的图片
-        List<ArchPicturePO> archPicturePOS = archDataService.getArchPicture(archId);
-
-        // 得到Arch的图片
-        List<String> picturePaths = archPicturePOS.stream()
+        // 得到 Arch 的评论
+        List<CommentVO> archComments = commentService.archComments(archId);
+        // 得到 Arch 的图片 url
+        List<String> picturePaths = archDataService
+                .getArchPicture(archId)
+                .stream()
                 .map(ArchPicturePO::getPicture)
                 .collect(Collectors.toList());
-
         // 得到Arch的评分
-        List<MarkPO> markPOS = markDataService.getMarks(archId);
-
-        // 评分记录的数量
-        int length = markPOS.size();
-
-        // 平均分
-        double score = 0;
-
-        // 计算平均分
-        for (MarkPO mark : markPOS) {
-            score += mark.getScore();
-        }
-
-        score /= length;
-
-        // 想个办法把他们组合起来
-        return ArchVO.buildVO(archPO, score, picturePaths, commentVOS);
+        List<MarkPO> marks = markDataService.getMarks(archId);
+        Double sum = marks
+                .stream()
+                .map(MarkPO::getScore)
+                .map(Integer::doubleValue)
+                .reduce(0.0, Double::sum);
+        return ArchVO.buildVO(archPO,
+                DoubleUtil.format(sum / marks.size(), 2),
+                picturePaths,
+                archComments);
     }
 
-    //评论建筑
-    @Override
-    public CommentVO comment(ArchCommentDTO archCommentDTO) {
-        // 向CommentPO中插入新的PO
-        // 返回相应的VO
-
-        //创建CommentPO
-        CommentPO commentPO=new CommentPO(archCommentDTO);
-
-        //插入CommentPO
-        commentDataService.insertComment(commentPO);
-
-        //返回CommentVO,新的CommentPO没有评论,先放个null在这里
-        return CommentVO.buildVO(commentPO,null);
-    }
-
-    // 对建筑评分
+    /**
+     * 对建筑评分
+     *
+     * @param archId 建筑 id
+     * @param score  分数 1-5
+     * @param userId 评分者用户 id
+     */
     @Override
     public void mark(Integer archId, Integer score, Integer userId) {
-        // 向MarkPO中插入新的PO
-        // 无返回
-        // TODO: markDataService 得改一下
-        markDataService.insertMark(archId, score,userId);
+        markDataService.insertMark(archId, score, userId);
     }
 
+    /**
+     * 获取全部建筑信息
+     *
+     * @return 建筑信息列表
+     */
     @Override
     public List<ArchViewVO> all() {
-        List<ArchPO> archPOS=archDataService.all();
-        List<ArchViewVO> archViewVOS=new ArrayList<>();
-        for(ArchPO archPO:archPOS){
-            archViewVOS.add(new ArchViewVO(archPO));
-        }
-        return archViewVOS;
+        return archDataService.getAll()
+                .stream()
+                .map(ArchViewVO::new)
+                .collect(Collectors.toList());
     }
 
 }

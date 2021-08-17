@@ -2,6 +2,7 @@ package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.CommentDataService;
 import com.edu.nju.alley.dao.LikeDataService;
+import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.service.CommentService;
@@ -9,7 +10,6 @@ import com.edu.nju.alley.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +17,21 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
 
     private final CommentDataService commentDataService;
-
     private final LikeDataService likeDataService;
 
     @Autowired
-    public CommentServiceImpl(CommentDataService commentDataService,LikeDataService likeDataService) {
+    public CommentServiceImpl(CommentDataService commentDataService,
+                              LikeDataService likeDataService) {
         this.commentDataService = commentDataService;
-        this.likeDataService=likeDataService;
+        this.likeDataService = likeDataService;
     }
 
+    /**
+     * 查看一条评论
+     *
+     * @param commentId 评论 id
+     * @return 评论信息
+     */
     @Override
     public CommentVO view(Integer commentId) {
         CommentPO comment = commentDataService.getComment(commentId);
@@ -38,6 +44,12 @@ public class CommentServiceImpl implements CommentService {
         return CommentVO.buildVO(comment, children);
     }
 
+    /**
+     * 返回用户发表的评论
+     *
+     * @param userId 用户 id
+     * @return 评论信息列表
+     */
     @Override
     public List<CommentVO> userComments(Integer userId) {
         return commentDataService
@@ -47,6 +59,12 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * 返回关于建筑的评论
+     *
+     * @param archId 建筑 id
+     * @return 评论信息列表
+     */
     @Override
     public List<CommentVO> archComments(Integer archId) {
         return commentDataService
@@ -56,40 +74,57 @@ public class CommentServiceImpl implements CommentService {
                 .collect(Collectors.toList());
     }
 
-    //评论一条评论
+    /**
+     * 评论一条评论
+     *
+     * @param childCommentDTO 子评论数据
+     * @return 评论数据
+     */
     @Override
-    public CommentVO comment(ChildCommentDTO childCommentDTO) {
-        //获得当前时间作为CreateT
-        //初始化likeNum为0
-        //创建CommentPO并插入
-        //返回CommentVO
-
-        //创建commentPO
-        CommentPO commentPO=CommentPO.childComment(childCommentDTO);
-
-        //插入commentPO
+    public CommentVO commentComment(ChildCommentDTO childCommentDTO) {
+        // 创建 commentPO
+        CommentPO commentPO = CommentPO.childComment(childCommentDTO);
+        // 插入 commentPO
         commentDataService.insertComment(commentPO);
-
         //返回CommentVO
-        return CommentVO.buildVO(commentPO,null);//新的评论没有子评论，我先放个null在这里
+        return CommentVO.buildVO(commentPO, null);//新的评论没有子评论，我先放个null在这里
     }
 
-    //点赞或取消点赞评论
+    /**
+     * 评论建筑
+     *
+     * @param archCommentDTO 评论信息
+     * @return 生成的评论
+     */
+    @Override
+    public CommentVO commentArch(ArchCommentDTO archCommentDTO) {
+        // 创建 CommentPO
+        CommentPO commentPO = new CommentPO(archCommentDTO);
+        // 插入 CommentPO
+        commentDataService.insertComment(commentPO);
+        // 返回 CommentVO，新的 CommentPO 没有评论，放个 null 在这里
+        return CommentVO.buildVO(commentPO, null);
+    }
+
+    /**
+     * 点赞或取消点赞评论
+     *
+     * @param commentId 评论 id
+     * @param userId    用户 id
+     */
     @Override
     public void like(Integer commentId, Integer userId) {
-        //插入或删除一条LikePO
-        //更新CommentPO中的likeNum
-        //如果已经点过赞
-        if(likeDataService.isExist(userId,commentId)){
-            //删除点赞记录
-            likeDataService.deleteLike(userId,commentId);
+        // 如果已经点过赞
+        if (likeDataService.isExist(userId, commentId)) {
+            // 删除点赞记录
+            likeDataService.deleteLike(userId, commentId);
             commentDataService.likeDown(commentId);
+            return;
         }
-        else{
-            //插入一条点赞记录
-            likeDataService.insertLike(userId,commentId);
-            commentDataService.likeUp(commentId);
-        }
+        // 尚未点赞
+        // 插入一条点赞记录
+        likeDataService.insertLike(userId, commentId);
+        commentDataService.likeUp(commentId);
     }
 
 }

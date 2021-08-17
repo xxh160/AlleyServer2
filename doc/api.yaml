@@ -515,6 +515,9 @@ components:
         picture:
           type: string
           description: 评论附图 url，如果没有则返回 -2
+        content:
+          type: string
+          description: 评论内容
         children:
           type: array
           description: 子评论，递归引用 openapi 显示不出来
