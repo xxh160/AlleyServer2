@@ -11,13 +11,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseVO<T> {
 
-    public ReturnCode code;
+    public Integer code;
 
     public String msg;
 
     public T data;
 
-    public ResponseVO<T> code(ReturnCode code) {
+    public ResponseVO<T> code(Integer code) {
         this.code = code;
         return this;
     }
@@ -38,13 +38,13 @@ public class ResponseVO<T> {
 
     public static <T> ResponseVO<T> success() {
         return ResponseVO.<T>build()
-                .code(ReturnCode.Success)
+                .code(ReturnCode.Success.getCode())
                 .msg(ReturnMessage.Success.getMsg());
     }
 
     public static <T> ResponseVO<T> failure() {
         return ResponseVO.<T>build()
-                .code(ReturnCode.Failure)
+                .code(ReturnCode.Failure.getCode())
                 .msg(ReturnMessage.Failure.getMsg());
     }
 
