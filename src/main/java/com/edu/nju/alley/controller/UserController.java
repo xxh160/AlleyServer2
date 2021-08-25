@@ -56,7 +56,7 @@ public class UserController {
                 .data(commentService.userComments(userId));
     }
 
-    @GetMapping("/comment/is_like/{userId}")
+    @GetMapping("/comment/isLike/{userId}")
     public ResponseVO<LikeVO> isLike(@PathVariable Integer userId, @RequestParam Integer commentId) {
         return ResponseVO
                 .<LikeVO>success()

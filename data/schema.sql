@@ -97,13 +97,13 @@ LOCK TABLES `comment` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `like`
+-- Table structure for table `like_info`
 --
 
-DROP TABLE IF EXISTS `like`;
+DROP TABLE IF EXISTS `like_info`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `like` (
+CREATE TABLE `like_info` (
   `user_id` int(11) NOT NULL,
   `comment_id` int(11) NOT NULL,
   PRIMARY KEY (`user_id`,`comment_id`)
@@ -111,12 +111,12 @@ CREATE TABLE `like` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `like`
+-- Dumping data for table `like_info`
 --
 
-LOCK TABLES `like` WRITE;
-/*!40000 ALTER TABLE `like` DISABLE KEYS */;
-/*!40000 ALTER TABLE `like` ENABLE KEYS */;
+LOCK TABLES `like_info` WRITE;
+/*!40000 ALTER TABLE `like_info` DISABLE KEYS */;
+/*!40000 ALTER TABLE `like_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -210,4 +210,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-23 18:28:49
+-- Dump completed on 2021-08-25 22:30:19

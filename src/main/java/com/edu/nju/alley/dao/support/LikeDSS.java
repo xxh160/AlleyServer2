@@ -19,7 +19,7 @@ public final class LikeDSS {
         public final SqlColumn<Integer> commentId = column("comment_id", JDBCType.INTEGER);
 
         public LikePO() {
-            super("like");
+            super("like_info");
         }
     }
 
