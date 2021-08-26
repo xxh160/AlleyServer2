@@ -6,6 +6,9 @@ import com.edu.nju.alley.dto.ArchCommentDTO;
 import com.edu.nju.alley.dto.ChildCommentDTO;
 import com.edu.nju.alley.po.CommentPO;
 import com.edu.nju.alley.service.CommentService;
+import com.edu.nju.alley.service.NoticeService;
+import com.edu.nju.alley.service.UserService;
+import com.edu.nju.alley.util.NoticeUtil;
 import com.edu.nju.alley.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +21,18 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentDataService commentDataService;
     private final LikeDataService likeDataService;
+    private final NoticeService noticeService;
+    private final UserService userService;
 
     @Autowired
     public CommentServiceImpl(CommentDataService commentDataService,
-                              LikeDataService likeDataService) {
+                              LikeDataService likeDataService,
+                              NoticeService noticeService,
+                              UserService userService) {
         this.commentDataService = commentDataService;
         this.likeDataService = likeDataService;
+        this.noticeService = noticeService;
+        this.userService = userService;
     }
 
     /**
@@ -86,7 +95,17 @@ public class CommentServiceImpl implements CommentService {
         CommentPO commentPO = CommentPO.childComment(childCommentDTO);
         // 插入 commentPO
         commentDataService.insertComment(commentPO);
-        //返回CommentVO
+        // 评论发布成功 notice
+        noticeService.buildSysNotice(childCommentDTO.getUserId(),
+                commentPO.getCommentId(),
+                NoticeUtil.commentSuccessNotice(commentPO.getContent()));
+        // 被评论 notice
+        CommentVO fatherComment = this.view(commentPO.getFatherId());
+        noticeService.buildCustomNotice(childCommentDTO.getUserId(),
+                fatherComment.getUserId(),
+                fatherComment.getCommentId(),
+                NoticeUtil.commentedNotice(fatherComment.getContent(), userService.view(commentPO.getUserId()).getName()));
+        // 返回 CommentVO
         return CommentVO.buildVO(commentPO, null);//新的评论没有子评论，我先放个null在这里
     }
 
@@ -102,6 +121,10 @@ public class CommentServiceImpl implements CommentService {
         CommentPO commentPO = new CommentPO(archCommentDTO);
         // 插入 CommentPO
         commentDataService.insertComment(commentPO);
+        // 发布成功 notice
+        noticeService.buildSysNotice(archCommentDTO.getUserId(),
+                commentPO.getCommentId(),
+                NoticeUtil.commentSuccessNotice(commentPO.getContent()));
         // 返回 CommentVO，新的 CommentPO 没有评论，放个 null 在这里
         return CommentVO.buildVO(commentPO, null);
     }

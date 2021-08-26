@@ -10,4 +10,8 @@ public interface NoticeService {
 
     void read(Integer noticeId);
 
+    void buildSysNotice(Integer userId, Integer commentId, String content);
+
+    void buildCustomNotice(Integer senderId, Integer userId, Integer commentId, String content);
+
 }

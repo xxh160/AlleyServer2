@@ -37,4 +37,9 @@ public class NoticeDataServiceImpl implements NoticeDataService {
         noticeMapper.updateByPrimaryKey(noticePO);
     }
 
+    @Override
+    public void insertNotice(NoticePO notice) {
+        noticeMapper.insert(notice);
+    }
+
 }

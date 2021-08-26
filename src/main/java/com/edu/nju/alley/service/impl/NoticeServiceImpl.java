@@ -1,6 +1,7 @@
 package com.edu.nju.alley.service.impl;
 
 import com.edu.nju.alley.dao.NoticeDataService;
+import com.edu.nju.alley.po.NoticePO;
 import com.edu.nju.alley.service.NoticeService;
 import com.edu.nju.alley.vo.NoticeVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,4 +48,21 @@ public class NoticeServiceImpl implements NoticeService {
         noticeDataService.read(noticeId);
     }
 
+    @Override
+    public void buildSysNotice(Integer userId, Integer commentId, String content) {
+        NoticePO notice = NoticePO
+                .getSysNotice(userId, commentId)
+                .content(content);
+        noticeDataService.insertNotice(notice);
+    }
+
+    @Override
+    public void buildCustomNotice(Integer senderId, Integer userId, Integer commentId, String content) {
+        NoticePO notice = NoticePO
+                .getDefaultNotice(senderId, userId, commentId)
+                .content(content);
+        noticeDataService.insertNotice(notice);
+    }
+
+   
 }
