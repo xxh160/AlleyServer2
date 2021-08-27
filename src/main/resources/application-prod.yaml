@@ -24,4 +24,3 @@ wechat:
 logging:
   file:
     name: src/main/resources/logs/log
-  level: debug
