@@ -33,7 +33,7 @@ public class NoticeDataServiceImpl implements NoticeDataService {
         Optional<NoticePO> optional = noticeMapper.selectByPrimaryKey(noticeId);
         if (optional.isEmpty()) throw new NoSuchDataException(ReturnMessage.NoSuchNoticeExp.getMsg());
         NoticePO noticePO = optional.get();
-        noticePO.setIsUnread(true);
+        noticePO.setIsUnread(false);
         noticeMapper.updateByPrimaryKey(noticePO);
     }
 
