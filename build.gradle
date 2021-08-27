@@ -8,6 +8,14 @@ group = 'com.edu.nju'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '16'
 
+jar {
+    enabled = true
+}
+
+bootJar {
+    classifier = 'boot'
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
